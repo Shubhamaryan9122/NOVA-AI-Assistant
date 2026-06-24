@@ -1,0 +1,11 @@
+{
+    "name": "Shubham",
+    "age": "23 years",
+    "last_question": "what is ap",
+    "last_answer": "AP typically stands for Advanced Placement, which is a program that offers college-level courses and exams to high school students. It's designed to help students prepare for college and potentially earn college credit.",
+    "conversation_context": {
+        "type": "restaurant",
+        "query": "restaurants near me",
+        "results": []
+    }
+}

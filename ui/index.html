@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>NOVA HUD</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="qrc:///qtwebchannel/qwebchannel.js"></script>
+</head>
+<body>
+
+<canvas id="hudCanvas"></canvas>
+
+<div class="particles"></div>
+
+<button id="micEnable">Enable Mic</button>
+
+<div class="ui">
+
+    <!-- LEFT -->
+    <div class="panel left">
+        <div class="box">TIME: <span id="time">--:--</span></div>
+        <div class="box">CPU: <span id="cpu">--%</span></div>
+        <div class="box">RAM: <span id="ram">--%</span></div>
+        <div class="box">BATTERY: <span id="battery">--%</span></div>
+    </div>
+
+    <!-- CENTER -->
+    <div class="center">
+
+        <div class="voice-ring"></div>
+
+        <div class="voice-wave">
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+
+        <h1>NOVA</h1>
+
+    </div>
+
+    <!-- RIGHT -->
+    <div class="panel right">
+
+    <div class="box">
+        STATUS: ONLINE
+    </div>
+
+    <div class="box">
+        SYSTEM: ACTIVE
+    </div>
+
+</div>
+
+</div>
+
+<div class="chat" id="chat"></div>
+
+<script src="script.js"></script>
+
+</body>
+</html>

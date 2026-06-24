@@ -1,0 +1,320 @@
+body{
+    margin:0;
+    background:#000;
+    color:#00ffff;
+    font-family:Arial,sans-serif;
+    overflow:hidden;
+}
+
+body::before{
+    content:"";
+    position:absolute;
+    inset:0;
+    background:
+        linear-gradient(rgba(0,255,255,.08) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0,255,255,.08) 1px, transparent 1px);
+    background-size:50px 50px;
+}
+
+.particles{
+    position:fixed;
+    inset:0;
+    opacity:.14;
+    pointer-events:none;
+    background-image:
+        radial-gradient(cyan 1px, transparent 1px);
+    background-size:35px 35px;
+}
+
+canvas{
+    position:absolute;
+    inset:0;
+}
+
+.ui{
+    display:grid;
+    grid-template-columns:1fr 2fr 1fr;
+    align-items:center;
+    height:100vh;
+    padding:0 50px;
+}
+
+/* LEFT + RIGHT PANELS */
+.panel{
+    display:flex;
+    flex-direction:column;
+    gap:28px;
+}
+
+.left{
+    align-items:flex-start;
+}
+
+.right{
+    align-items:flex-end;
+}
+
+/* BOX */
+.box{
+    width:260px;
+    padding:14px;
+    font-size:18px;
+    font-weight:600;
+    text-align:center;
+    border-radius:18px;
+    color:#00ffff;
+    border:1px solid rgba(0,255,255,.55);
+    background:rgba(0,255,255,.04);
+
+    box-shadow:
+        0 0 18px rgba(0,255,255,.35),
+        inset 0 0 10px rgba(0,255,255,.15);
+}
+
+/* CENTER */
+.center{
+    position:relative;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    flex-direction:column;
+}
+
+/* ASTRA TEXT */
+.center h1{
+    font-size:76px;
+    z-index:10;
+    letter-spacing:4px;
+    text-shadow:
+        0 0 20px cyan,
+        0 0 50px cyan;
+}
+
+/* ORB */
+.voice-ring{
+    position:absolute;
+    width:330px;
+    height:330px;
+    border-radius:50%;
+    border:3px solid rgba(0,255,255,.7);
+
+    box-shadow:
+        0 0 25px cyan,
+        0 0 80px rgba(0,255,255,.4),
+        inset 0 0 25px rgba(0,255,255,.2);
+
+    animation:pulseGlow 2s infinite ease-in-out;
+    transition:all .3s ease;
+}
+
+@keyframes pulseGlow{
+    0%{
+        transform:scale(1);
+    }
+    50%{
+        transform:scale(1.03);
+    }
+    100%{
+        transform:scale(1);
+    }
+}
+
+/* WAVE */
+.voice-wave{
+    position:absolute;
+    bottom:-55px;
+    display:flex;
+    gap:7px;
+}
+
+.voice-wave span{
+    width:6px;
+    height:12px;
+    background:cyan;
+    border-radius:20px;
+    animation:wave 1s infinite ease-in-out;
+}
+
+@keyframes wave{
+    0%,100%{
+        height:12px;
+    }
+    50%{
+        height:24px;
+    }
+}
+
+/* CHAT */
+.chat{
+    position:fixed;
+    left:50%;
+    transform:translateX(-50%);
+    bottom:10px;
+
+    width:660px;
+    height:82px;
+
+    overflow-y:auto;
+    overflow-x:hidden;
+
+    padding:12px 14px;
+
+    border-radius:18px;
+
+    background:rgba(0,0,0,.55);
+    backdrop-filter:blur(12px);
+
+    border:1px solid rgba(0,255,255,.28);
+
+    box-shadow:
+        0 0 16px rgba(0,255,255,.16);
+}
+
+.chat div{
+    margin:8px 0;
+    padding:10px 12px;
+    font-size:15px;
+    line-height:1.45;
+    border-radius:10px;
+    background:rgba(0,255,255,.04);
+    border-left:3px solid cyan;
+    white-space:pre-wrap;
+    word-break:break-word;
+}
+
+/* MIC BUTTON */
+#micEnable{
+    position:absolute;
+    top:70px;
+    right:28px;
+    z-index:9999;
+
+    background:rgba(0,0,0,.7);
+    color:#00ffff;
+
+    border:1px solid cyan;
+    border-radius:12px;
+
+    padding:8px 14px;
+    font-size:14px;
+}
+
+
+/* =========================
+   SPEAKING MODE
+========================= */
+
+.voice-ring.speaking{
+    animation:speakingPulse .7s infinite ease-in-out;
+}
+
+@keyframes speakingPulse{
+    0%{
+        transform:scale(1);
+    }
+
+    50%{
+        transform:scale(1.08);
+        box-shadow:
+            0 0 45px cyan,
+            0 0 130px rgba(0,255,255,.7);
+    }
+
+    100%{
+        transform:scale(1);
+    }
+}
+
+
+/* =========================
+   LISTENING MODE
+========================= */
+
+.voice-wave.listening span{
+    animation:listeningWave .45s infinite ease-in-out;
+}
+
+@keyframes listeningWave{
+    0%,100%{
+        height:14px;
+    }
+
+    50%{
+        height:46px;
+    }
+}
+
+
+/* =========================
+   PROCESSING MODE
+========================= */
+
+.voice-ring.processing{
+    animation:rotateFast .9s linear infinite;
+}
+
+@keyframes rotateFast{
+    from{
+        transform:rotate(0deg);
+    }
+
+    to{
+        transform:rotate(360deg);
+    }
+}
+
+/* =========================
+   FLOATING STATUS POPUP
+========================= */
+
+#statusPopup{
+    position:fixed;
+    top:20px;
+    left:20px;
+
+    z-index:99999;
+
+    min-width:170px;
+
+    padding:14px 18px;
+
+    border-radius:16px;
+
+    background:rgba(0,0,0,.72);
+
+    backdrop-filter:blur(14px);
+
+    color:#00ffff;
+
+    font-size:14px;
+    font-weight:600;
+
+    border:1px solid rgba(0,255,255,.35);
+
+    box-shadow:
+        0 0 20px rgba(0,255,255,.25);
+
+    transition:.25s ease;
+}
+
+
+/* popup pulse while listening */
+
+.listening{
+    animation:pulseHUD 1s infinite;
+}
+
+@keyframes pulseHUD{
+
+    0%{
+        transform:scale(1);
+    }
+
+    50%{
+        transform:scale(1.05);
+    }
+
+    100%{
+        transform:scale(1);
+    }
+}
